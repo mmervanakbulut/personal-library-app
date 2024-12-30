@@ -7,6 +7,7 @@ import {
   Button,
   Menu,
   MenuItem,
+  useTheme,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -15,6 +16,7 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const theme = useTheme();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -32,8 +34,8 @@ const Navbar = () => {
   return (
     <AppBar
       sx={{
-        backgroundColor: "black",
-        color: "white",
+        backgroundColor: theme.palette.mode === "dark" ? "white" : "black",
+        color: theme.palette.mode === "dark" ? "black" : "white",
         borderRadius: 10,
         marginTop: 1,
       }}
@@ -49,7 +51,9 @@ const Navbar = () => {
           to="/"
           sx={{
             borderRadius: 10,
-            ":hover": { backgroundColor: "lightslategray" },
+            ":hover": {
+              backgroundColor: theme.palette.mode === "dark" ? "lightgray" : "lightslategray",
+            },
           }}
         >
           HOME
@@ -61,7 +65,9 @@ const Navbar = () => {
               onClick={handleMenuOpen}
               sx={{
                 borderRadius: 10,
-                ":hover": { backgroundColor: "lightslategray" },
+                ":hover": {
+                  backgroundColor: theme.palette.mode === "dark" ? "lightgray" : "lightslategray",
+                },
                 display: "flex",
                 alignItems: "center",
               }}
@@ -112,7 +118,9 @@ const Navbar = () => {
               onClick={handleLogout}
               sx={{
                 borderRadius: 10,
-                ":hover": { backgroundColor: "lightslategray" },
+                ":hover": {
+                  backgroundColor: theme.palette.mode === "dark" ? "lightgray" : "lightslategray",
+                },
               }}
             >
               LOGOUT
@@ -126,7 +134,9 @@ const Navbar = () => {
               to="/login"
               sx={{
                 borderRadius: 10,
-                ":hover": { backgroundColor: "lightslategray" },
+                ":hover": {
+                  backgroundColor: theme.palette.mode === "dark" ? "lightgray" : "lightslategray",
+                },
               }}
             >
               LOGIN
@@ -137,7 +147,9 @@ const Navbar = () => {
               to="/signup"
               sx={{
                 borderRadius: 10,
-                ":hover": { backgroundColor: "lightslategray" },
+                ":hover": {
+                  backgroundColor: theme.palette.mode === "dark" ? "lightgray" : "lightslategray",
+                },
               }}
             >
               SIGN UP

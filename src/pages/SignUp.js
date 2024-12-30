@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [surname, setSurname] = useState("");
+  const theme = useTheme();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -55,8 +63,8 @@ const SignUp = () => {
           mt: 4,
           padding: 5,
           margin: 4,
-          backgroundColor: "revert",
-          border: 1,
+          backgroundColor: theme.palette.mode === "dark" ? "black" : "revert",
+          color: theme.palette.mode === "dark" ? "white" : "black",
           boxShadow: 5,
           borderRadius: 10,
         }}
@@ -72,6 +80,12 @@ const SignUp = () => {
           required
           fullWidth
           margin="normal"
+          InputLabelProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
+          InputProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
         />
         <TextField
           label="Surname"
@@ -81,6 +95,12 @@ const SignUp = () => {
           required
           fullWidth
           margin="normal"
+          InputLabelProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
+          InputProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
         />
         <TextField
           label="Email"
@@ -90,6 +110,12 @@ const SignUp = () => {
           required
           fullWidth
           margin="normal"
+          InputLabelProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
+          InputProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
         />
         <TextField
           label="Password"
@@ -99,11 +125,17 @@ const SignUp = () => {
           required
           fullWidth
           margin="normal"
+          InputLabelProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
+          InputProps={{
+            style: { color: theme.palette.mode === "dark" ? "white" : "black" },
+          }}
         />
         <Button
           type="submit"
           variant="contained"
-          sx={{ mt: 2, background: "#263238" }}
+          sx={{ mt: 2, background: "orange" }}
         >
           SignUp
         </Button>

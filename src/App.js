@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -12,15 +12,6 @@ import Grid from "@mui/material/Grid2";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-    }
-  }, [navigate]);
-
   return (
     <Grid container spacing={2}>
       <Grid size={2}></Grid>
