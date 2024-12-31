@@ -7,6 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -135,6 +136,7 @@ const SignUp = () => {
         <Button
           type="submit"
           variant="contained"
+          endIcon={<PersonAddIcon />}
           sx={{ mt: 2, background: "orange" }}
         >
           SignUp
