@@ -5,6 +5,8 @@ import {
   Container,
   TextField,
   Typography,
+  Snackbar,
+  Alert,
   useTheme,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -14,6 +16,9 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [surname, setSurname] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const theme = useTheme();
 
   const handleEmailChange = (e) => {
@@ -32,24 +37,31 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://localhost:7168/Auth/signup", {
+      const response = await fetch("https://localhost:7168/api/User", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, userName, surname }),
+        body: JSON.stringify({ name: userName, surname, email, password }),
       });
 
       if (response.ok) {
-        // Handle successful signup
-        console.log("Signup successful");
+        setSnackbarMessage("Signup successful");
+        setSnackbarSeverity("success");
       } else {
-        // Handle signup error
-        console.error("Signup failed");
+        setSnackbarMessage("Signup failed");
+        setSnackbarSeverity("error");
       }
     } catch (error) {
-      console.error("Error:", error);
+      setSnackbarMessage("Error: " + error.message);
+      setSnackbarSeverity("error");
+    } finally {
+      setOpenSnackbar(true);
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -142,6 +154,15 @@ const SignUp = () => {
           SignUp
         </Button>
       </Box>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

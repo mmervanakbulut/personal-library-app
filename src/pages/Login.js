@@ -7,6 +7,8 @@ import {
   Typography,
   Box,
   CircularProgress,
+  Snackbar,
+  Alert,
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +17,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -41,16 +46,24 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        setSnackbarMessage("Login successful");
+        setSnackbarSeverity("success");
         navigate("/kitaplarim");
       } else {
-        // Handle login error
-        console.error("Login failed");
+        setSnackbarMessage("Login failed");
+        setSnackbarSeverity("error");
       }
     } catch (error) {
-      console.error("Error:", error);
+      setSnackbarMessage("Error: " + error.message);
+      setSnackbarSeverity("error");
     } finally {
       setLoading(false);
+      setOpenSnackbar(true);
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -115,6 +128,15 @@ const Login = () => {
           {loading ? <CircularProgress size={24} /> : "Login"}
         </Button>
       </Box>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
