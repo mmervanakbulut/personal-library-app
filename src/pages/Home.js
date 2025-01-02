@@ -24,13 +24,7 @@ const Home = () => {
             Bıraktığı İz
           </Typography>
           <Typography variant="body1">
-            Derin izler bıraktı bazıları; bazıları yorgun bıraktı, kimisi yarı
-            yolda bıraktı. Çok güzel bir tebessüm bıraktı bazısı. Ne güzel
-            izelerdi her biri. O izlerin derinliğinde kıvrandım bazen, bazen de
-            o izleri silip atmak istedim. Kendimi buldum o sayfalarda, istemedim
-            o ben olayım ama beni anlatıyordu sanki. Evet o anlattığı sözde
-            karakteri içimde yaşıyor buludum en sonunda. İstemeden de olsa bir
-            yerlerde yaşattım onu... Sana seni anlattı o :)
+            This is the right side content.
           </Typography>
         </Box>
       </Grid>
